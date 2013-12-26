@@ -1,7 +1,6 @@
 package jp.simple_asta.blog.b2.client;
 
 import java.io.UnsupportedEncodingException;
-import java.util.regex.Pattern;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -12,6 +11,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ThreadClickHandler implements ClickHandler {
+	@SuppressWarnings("unused")
 	private static final String regex2 = ".*?(<a href=\".*?\" target=\"_blank\">&gt;&gt;([0-9]*?)</a>).*?";
 	//private static final Pattern REG_ANKER = Pattern.compile(regex2);
 	private final GreetingServiceAsync greetingService;

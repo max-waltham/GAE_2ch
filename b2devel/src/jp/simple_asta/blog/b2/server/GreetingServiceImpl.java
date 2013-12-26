@@ -1,12 +1,7 @@
 package jp.simple_asta.blog.b2.server;
 
-import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import java.util.zip.GZIPOutputStream;
-
-import org.apache.commons.io.output.ByteArrayOutputStream;
 
 import jp.simple_asta.blog.b2.client.GreetingService;
 
