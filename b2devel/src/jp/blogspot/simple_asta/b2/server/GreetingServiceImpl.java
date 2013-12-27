@@ -1,9 +1,9 @@
-package jp.simple_asta.blog.b2.server;
+package jp.blogspot.simple_asta.b2.server;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import jp.simple_asta.blog.b2.client.GreetingService;
+import jp.blogspot.simple_asta.b2.client.GreetingService;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 

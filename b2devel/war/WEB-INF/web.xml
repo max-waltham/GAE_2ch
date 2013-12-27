@@ -8,7 +8,7 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>jp.simple_asta.blog.b2.server.GreetingServiceImpl</servlet-class>
+    <servlet-class>jp.blogspot.simple_asta.b2.server.GreetingServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>

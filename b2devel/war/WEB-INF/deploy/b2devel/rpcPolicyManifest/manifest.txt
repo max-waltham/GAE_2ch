@@ -1,3 +1,0 @@
-# Module b2devel
-# RPC service class, partial path of RPC policy file
-jp.simple_asta.blog.b2.client.GreetingService, 7107C978159B23D15DD0DB14B2B2A7EA.gwt.rpc

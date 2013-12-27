@@ -1,4 +1,4 @@
-package jp.simple_asta.blog.b2.server;
+package jp.blogspot.simple_asta.b2.client;
 
 
 /*

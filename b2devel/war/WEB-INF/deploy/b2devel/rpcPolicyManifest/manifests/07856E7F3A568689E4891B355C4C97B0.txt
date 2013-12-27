@@ -1,2 +1,0 @@
-serviceClass: jp.simple_asta.blog.b2.client.GreetingService
-path: 7107C978159B23D15DD0DB14B2B2A7EA.gwt.rpc
