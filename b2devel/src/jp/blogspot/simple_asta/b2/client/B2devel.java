@@ -55,13 +55,10 @@ public class B2devel implements EntryPoint {
 		tree.addSelectionHandler(new ThreadListSelectionHandler(
 				greetingService, list));
 		ScrollPanel scrollp = new ScrollPanel(tree);
-		sp.addWest(scrollp, 128);
+		sp.addWest(scrollp, 140);
 
 		list.setSize("100%", "100%");
-		ScrollPanel scrollp2 = new ScrollPanel(list);
-		scrollp2.setSize("100%", "100%");
-
-		sp.addNorth(scrollp2, 200);
+		sp.addNorth(list, 200);
 		list.addClickHandler(new ThreadClickHandler(this.greetingService, detail));
 
 		ScrollPanel scrolp3 = new ScrollPanel(detail);
@@ -127,7 +124,6 @@ public class B2devel implements EntryPoint {
 							}
 						}
 						tree.setVisible(true);
-
 					}
 
 					// @SuppressWarnings("resource")
