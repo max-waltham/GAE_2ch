@@ -222,16 +222,33 @@ public class B2 {
 				"Shift_JIS");
 		BufferedReader br = new BufferedReader(in);
 		int responseCode = conn.getResponseCode();
-		StringBuilder sb = new StringBuilder(1024);
+		StringBuilder bo = new StringBuilder(1024);
 		if (200 == responseCode || responseCode == 206) {
 			String ss = null;
+			final Num count = new Num();
 			while ((ss = br.readLine()) != null) {
-				sb.append(ss).append("\n");
+				//sb.append(ss).append("\n");
+				String[] r = ss.split("<>");
+				bo.append("<div id=r_").append(count).append(
+						"><font size=2><b>").append(count).append(" ").append(
+						r[2]).append("</b></font><br>");
+
+				java.util.regex.Matcher bm = REG_ANKER.matcher(r[3]);
+				while (bm.find()) {
+					final int res = Integer.parseInt(bm.group(2));
+					final StringBuilder respopup = new StringBuilder();
+					respopup.append("<div onclick='r_p(this,").append(res)
+							.append(");'>&gt;&gt;").append(res)
+							.append("</div>");
+					r[3] = r[3].replace(bm.group(1), respopup.toString());
+				}
+
+				bo.append(r[3]).append("</div>");
+				count.incl();
 			}
 		}
 		br.close();
-		
-		return sb.toString();
+		return bo.toString();
 	}
 
 	private static final Res[] getContents(final URL url) throws IOException {

@@ -24,15 +24,38 @@
     <!-- be added before this line.                -->
     <!--                                           -->
     <script type="text/javascript" language="javascript" src="b2devel/b2devel.nocache.js"></script>
-
+	<style type="text/css">
+	.r_s {
+		border: 1px solid #9999FF;
+		margin: 4px 4px 2px 2px;
+		padding-left: 2px;
+	}
+	body {
+		color: #888888;
+	}
+	a {
+		color: #888888;
+		text-decoration:none;
+	}
+	</style>
 	<script type="text/javascript" language="javascript">
 	var getElementByXpath = function (path) {
 	    return document.evaluate(path, document, null, 9, null).singleNodeValue;
 	};
 	var fit = function(){
 		var listViewPane = getElementByXpath("/html/body/div[2]/div[2]/div/div[4]/div/div");
-		listViewPane.style.height = "100%";
+		if (listViewPane !== null) {
+			listViewPane.style.height = "100%";
+		}
 	}
+	
+	var r_p = function(ank, res){
+		var div = document.getElementById("r_"+res);
+		ank.onclick = null;
+		ank.innerHTML = div.innerHTML;
+		ank.className="r_s";
+	}
+	
 	</script>
   </head>
 

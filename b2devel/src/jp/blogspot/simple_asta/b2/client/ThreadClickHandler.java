@@ -72,7 +72,7 @@ public class ThreadClickHandler implements ClickHandler {
 						} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}
-						detail.setHTML(formatHTML(result));
+						detail.setHTML((result));
 					}
 
 					private String formatHTML(String result) {
@@ -88,7 +88,7 @@ public class ThreadClickHandler implements ClickHandler {
 									.append("><font size=2><b>").append(count)
 									.append(" ").append(r[2])
 									.append("</b></font><br>");
-
+							/**/
 							bo.append(r[3]).append("</div>");
 							fh.append(bo.toString()).append("\n");
 							count.incl();
