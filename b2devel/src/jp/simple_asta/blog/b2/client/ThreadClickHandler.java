@@ -8,24 +8,28 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ThreadClickHandler implements ClickHandler {
 	@SuppressWarnings("unused")
 	private static final String regex2 = ".*?(<a href=\".*?\" target=\"_blank\">&gt;&gt;([0-9]*?)</a>).*?";
-	//private static final Pattern REG_ANKER = Pattern.compile(regex2);
+	// private static final Pattern REG_ANKER = Pattern.compile(regex2);
+
 	private final GreetingServiceAsync greetingService;
+	private final HTML detail;
 
-	public ThreadClickHandler(final GreetingServiceAsync greetingService_) {
+	public ThreadClickHandler(final GreetingServiceAsync greetingService_,
+			final HTML detail_) {
 		this.greetingService = greetingService_;
-
+		this.detail = detail_;
 	}
 
 	@Override
 	public void onClick(ClickEvent event) {
-		int sel = B2devel.list.getSelectedIndex();
+		int sel = ((ListBox) event.getSource()).getSelectedIndex();
 
-		String url = B2devel.list.getValue(sel);
+		String url = ((ListBox) event.getSource()).getValue(sel);
 
 		final DialogBox dialogBox = new DialogBox();
 		dialogBox.setText("Board");
@@ -68,7 +72,7 @@ public class ThreadClickHandler implements ClickHandler {
 						} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}
-						B2devel.detail.setHTML(formatHTML(result));
+						detail.setHTML(formatHTML(result));
 					}
 
 					private String formatHTML(String result) {

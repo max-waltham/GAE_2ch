@@ -23,8 +23,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class B2devel implements EntryPoint {
 
-	public static ListBox list = new ListBox(true);
-	public static HTML detail = new HTML("");
 	/**
 	 * The message displayed to the user when the server cannot be reached or
 	 * returns an error.
@@ -46,33 +44,30 @@ public class B2devel implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 
-		//final Button sendButton = new Button("Send");
-
-		//sendButton.addStyleName("sendButton");
-
 		SplitLayoutPanel sp = new SplitLayoutPanel();
 		sp.setVisible(true);
 
 		Tree tree = new Tree();
+		ListBox list = new ListBox(true);
+		 HTML detail = new HTML("");
+		
 		getCategoryTree(tree);
-		tree.addSelectionHandler(new ThreadListSelectionHandler(greetingService));
+		tree.addSelectionHandler(new ThreadListSelectionHandler(
+				greetingService, list));
 		ScrollPanel scrollp = new ScrollPanel(tree);
 		sp.addWest(scrollp, 128);
 
 		list.setSize("100%", "100%");
 		ScrollPanel scrollp2 = new ScrollPanel(list);
 		scrollp2.setSize("100%", "100%");
-			
+
 		sp.addNorth(scrollp2, 200);
-		list.addClickHandler(new ThreadClickHandler(this.greetingService));
+		list.addClickHandler(new ThreadClickHandler(this.greetingService, detail));
 
 		ScrollPanel scrolp3 = new ScrollPanel(detail);
 		sp.add(scrolp3);
 		RootLayoutPanel.get().add(sp);
 
-		//CategoryListHandler handler = new CategoryListHandler(greetingService,
-		//		sendButton);
-		//sendButton.addClickHandler(handler);
 	}
 
 	private void getCategoryTree(final Tree tree) {

@@ -10,16 +10,18 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ThreadListSelectionHandler implements SelectionHandler<TreeItem> {
 	private final GreetingServiceAsync greetingService;
-
+	private final ListBox list;
 	public ThreadListSelectionHandler(
-			final GreetingServiceAsync greetingService_) {
+			final GreetingServiceAsync greetingService_, final ListBox list_) {
 		this.greetingService = greetingService_;
-
+		this.list = list_;
 	}
 
 	@Override
@@ -60,7 +62,7 @@ public class ThreadListSelectionHandler implements SelectionHandler<TreeItem> {
 
 				@Override
 				public void onSuccess(byte[] resultb) {
-					B2devel.list.clear();
+					list.clear();
 					serverResponseLabel
 							.removeStyleName("serverResponseLabelError");
 					String result = "";
@@ -72,10 +74,10 @@ public class ThreadListSelectionHandler implements SelectionHandler<TreeItem> {
 					String[] names = result.split("><");
 					for (String name : names) {
 						String[] t = name.split("<>");
-						B2devel.list.addItem(t[1], t[2] );
+						list.addItem(t[1], t[2] );
 					}
 
-					B2devel.list.setVisibleItemCount(names.length);
+					list.setVisibleItemCount(names.length);
 				}
 			});
 			dialogVPanel.add(closeButton);
