@@ -43,6 +43,8 @@ public class B2 {
 	private static final String regex2 = ".*?(<a href=\".*?\" target=\"_blank\">&gt;&gt;([0-9]*?)</a>).*?";
 	private static final Pattern REG_ANKER = Pattern.compile(regex2);
 
+	private static final String regex3 = ".*?((ttp://|http://).*?(\\<br\\>|\\.jpg|\\.gif)).*?";
+	private static final Pattern REG_PICS = Pattern.compile(regex3);
 	static String s = "";
 	static String location = "";
 
@@ -227,11 +229,11 @@ public class B2 {
 			String ss = null;
 			final Num count = new Num();
 			while ((ss = br.readLine()) != null) {
-				//sb.append(ss).append("\n");
+				// sb.append(ss).append("\n");
 				String[] r = ss.split("<>");
-				bo.append("<div id=r_").append(count).append(
-						"><font size=2><b>").append(count).append(" ").append(
-						r[2]).append("</b></font><br>");
+				bo.append("<div id=r_").append(count)
+						.append("><font size=2><b>").append(count).append(" ")
+						.append(r[2]).append("</b></font><br>");
 
 				java.util.regex.Matcher bm = REG_ANKER.matcher(r[3]);
 				while (bm.find()) {
@@ -243,6 +245,22 @@ public class B2 {
 					r[3] = r[3].replace(bm.group(1), respopup.toString());
 				}
 
+				java.util.regex.Matcher bm2 = REG_PICS.matcher(r[3]);
+				while (bm2.find()) {
+					String res = bm2.group(1);
+					if (res.endsWith(".jpg") || res.endsWith(".gif")) {
+						if (!res.startsWith("h") && !res.startsWith("H")) {
+							res = "h" + res;
+						}
+						final StringBuilder respopup = new StringBuilder();
+						respopup.append("<a href='").append(res)
+								.append("' target='_blank'><img width='54' height='48' src='")
+								.append(res).append("' />").append(res)
+								.append("</a>");
+						
+						r[3] = r[3].replace(bm2.group(1), respopup.toString());
+					}
+				}
 				bo.append(r[3]).append("</div>");
 				count.incl();
 			}

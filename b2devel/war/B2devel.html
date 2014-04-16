@@ -39,23 +39,53 @@
 	}
 	</style>
 	<script type="text/javascript" language="javascript">
+	var WIZARD1_OBJ = {
+			formValue : ""
+	}
+	
 	var getElementByXpath = function (path) {
 	    return document.evaluate(path, document, null, 9, null).singleNodeValue;
 	};
-	var fit = function(){
+	var bodyonload = function(){
 		var listViewPane = getElementByXpath("/html/body/div[2]/div[2]/div/div[4]/div/div");
 		if (listViewPane !== null) {
 			listViewPane.style.height = "100%";
 		}
+		
+		var box = document.getElementsByName("ThreadSearchBox")[0];
+		box.onkeydown = function(){ 
+			var boxB = document.getElementsByName("ThreadSearchBox")[0];
+			onSearchFieldChange(boxB.value)
+		};
 	}
-	
 	var r_p = function(ank, res){
 		var div = document.getElementById("r_"+res);
 		ank.onclick = null;
 		ank.innerHTML = div.innerHTML;
 		ank.className="r_s";
 	}
-	
+
+	var onSearchFieldChange = function( value){
+				
+		var customerSelect = document.getElementsByName("ThreadList")[0];
+		var customers = customerSelect.children;
+		if (value === "") {
+			for(var i=customers.length-1; i>=0; i--){
+				customers[i].style.display = "";
+				customers[i].selected = false;
+			}
+			return;
+		}
+		var reg = new RegExp(".*"+value+".*","i");
+		for(var i=customers.length-1; i>=0; i--){
+			if ( customers[i].textContent.match(reg) ){
+				customers[i].style.display = "";		
+			} else {
+				customers[i].style.display = "none";
+			}
+			customers[i].selected = false;
+		}
+	}
 	</script>
   </head>
 
@@ -64,7 +94,7 @@
   <!-- you can leave the body empty if you want  -->
   <!-- to create a completely dynamic UI.        -->
   <!--                                           -->
-  <body onload="fit();">
+  <body onload="bodyonload();">
 
     <!-- OPTIONAL: include this if you want history support -->
     <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>

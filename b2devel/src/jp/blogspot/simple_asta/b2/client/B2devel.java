@@ -4,6 +4,10 @@ import java.io.UnsupportedEncodingException;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -16,7 +20,9 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.web.bindery.event.shared.Event;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -48,8 +54,8 @@ public class B2devel implements EntryPoint {
 		sp.setVisible(true);
 
 		Tree tree = new Tree();
-		ListBox list = new ListBox(true);
-		 HTML detail = new HTML("");
+		final ListBox list = new ListBox(true);
+		HTML detail = new HTML("");
 		
 		getCategoryTree(tree);
 		tree.addSelectionHandler(new ThreadListSelectionHandler(
@@ -57,8 +63,17 @@ public class B2devel implements EntryPoint {
 		ScrollPanel scrollp = new ScrollPanel(tree);
 		sp.addWest(scrollp, 140);
 
+		SplitLayoutPanel threadListSP = new SplitLayoutPanel();
+		
 		list.setSize("100%", "100%");
-		sp.addNorth(list, 200);
+		list.setName("ThreadList");
+		threadListSP.add(list);
+		TextBox threadSearchBox = new TextBox();
+		threadSearchBox.setName("ThreadSearchBox");
+		
+		threadListSP.addSouth(threadSearchBox, 25);
+		
+		sp.addNorth(threadListSP, 200);
 		list.addClickHandler(new ThreadClickHandler(this.greetingService, detail));
 
 		ScrollPanel scrolp3 = new ScrollPanel(detail);

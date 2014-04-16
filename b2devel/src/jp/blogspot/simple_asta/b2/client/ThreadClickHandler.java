@@ -72,30 +72,10 @@ public class ThreadClickHandler implements ClickHandler {
 						} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}
+						final DialogBox dialogBox = new DialogBox();
 						detail.setHTML((result));
 					}
 
-					private String formatHTML(String result) {
-						StringBuilder fh = new StringBuilder();
-						String[] lines = result.split("\n");
-						final Num count = new Num();
-						for (String line : lines) {
-							final StringBuffer bo = new StringBuffer();
-
-							String[] r = line.split("<>");
-
-							bo.append("<div id=r_").append(count)
-									.append("><font size=2><b>").append(count)
-									.append(" ").append(r[2])
-									.append("</b></font><br>");
-							/**/
-							bo.append(r[3]).append("</div>");
-							fh.append(bo.toString()).append("\n");
-							count.incl();
-
-						}
-						return fh.toString();
-					}
 				});
 	}
 
