@@ -18,6 +18,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
+import com.google.gwt.user.client.ui.StackPanel;
+import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.TextBox;
@@ -52,34 +54,43 @@ public class B2devel implements EntryPoint {
 
 		SplitLayoutPanel sp = new SplitLayoutPanel();
 		sp.setVisible(true);
+		StackPanel layoutPanel = new StackPanel();
+		layoutPanel.setSize("100%", "100%");
+		layoutPanel.setVisible(true);
 
 		Tree tree = new Tree();
 		final ListBox list = new ListBox(true);
+
 		HTML detail = new HTML("");
-		
+ 
 		getCategoryTree(tree);
 		tree.addSelectionHandler(new ThreadListSelectionHandler(
 				greetingService, list));
-		ScrollPanel scrollp = new ScrollPanel(tree);
-		sp.addWest(scrollp, 140);
+		 ScrollPanel scrollp = new ScrollPanel(tree);
+		// sp.addWest(scrollp, 140);
 
-		SplitLayoutPanel threadListSP = new SplitLayoutPanel();
-		
+		layoutPanel.add(scrollp, "Category");
+
 		list.setSize("100%", "100%");
 		list.setName("ThreadList");
-		threadListSP.add(list);
-		TextBox threadSearchBox = new TextBox();
-		threadSearchBox.setName("ThreadSearchBox");
-		
-		threadListSP.addSouth(threadSearchBox, 25);
-		
-		sp.addNorth(threadListSP, 200);
-		list.addClickHandler(new ThreadClickHandler(this.greetingService, detail));
+		{
+			// SplitLayoutPanel threadListSP = new SplitLayoutPanel();
+			// threadListSP.add(list);
+			// TextBox threadSearchBox = new TextBox();
+			// threadSearchBox.setName("ThreadSearchBox");
+			// threadListSP.addSouth(threadSearchBox, 25);
+		}
+		// sp.addNorth(threadListSP, 200);
+		layoutPanel.add(list, "ThreadList");
+		list.addClickHandler(new ThreadClickHandler(this.greetingService,
+				detail));
 
 		ScrollPanel scrolp3 = new ScrollPanel(detail);
-		sp.add(scrolp3);
-		RootLayoutPanel.get().add(sp);
+		// sp.add(scrolp3);
+		layoutPanel.add(scrolp3, "Thread");
+		// RootLayoutPanel.get().add(sp);
 
+		RootLayoutPanel.get().add(layoutPanel);
 	}
 
 	private void getCategoryTree(final Tree tree) {

@@ -43,8 +43,9 @@ public class B2 {
 	private static final String regex2 = ".*?(<a href=\".*?\" target=\"_blank\">&gt;&gt;([0-9]*?)</a>).*?";
 	private static final Pattern REG_ANKER = Pattern.compile(regex2);
 
-	private static final String regex3 = ".*?((ttp://|http://).*?(\\<br\\>|\\.jpg|\\.gif)).*?";
+	private static final String regex3 = ".*?((ttp://|http://|ttps://|https://).*?($|\\s)).*?";// |\\.jpg|\\.gif
 	private static final Pattern REG_PICS = Pattern.compile(regex3);
+
 	static String s = "";
 	static String location = "";
 
@@ -214,6 +215,8 @@ public class B2 {
 		return reses;
 	}
 
+
+
 	public static final String getThreadDat(final String strUrl)
 			throws IOException {
 		final HttpURLConnection conn;
@@ -248,26 +251,30 @@ public class B2 {
 				java.util.regex.Matcher bm2 = REG_PICS.matcher(r[3]);
 				while (bm2.find()) {
 					String res = bm2.group(1);
-					if (res.endsWith(".jpg") || res.endsWith(".gif")) {
-						if (!res.startsWith("h") && !res.startsWith("H")) {
-							res = "h" + res;
-						}
-						final StringBuilder respopup = new StringBuilder();
-						respopup.append("<a href='").append(res)
-								.append("' target='_blank'><img width='54' height='48' src='")
-								.append(res).append("' />").append(res)
-								.append("</a>");
-						
-						r[3] = r[3].replace(bm2.group(1), respopup.toString());
+					/*
+					 * if (res.endsWith(".jpg") || res.endsWith(".gif")) {
+					 * .append("<img width='54' height='48' src='"
+					 * ).append(res).append("' />")
+					 */
+					res = res.substring(0, res.length() - 1);
+					char start = res.charAt(0);
+					if (start != 'h' && start != 'H') {
+						res = "h" + res;
 					}
+					final StringBuilder respopup = new StringBuilder();
+					respopup.append("<a href='").append(res)
+							.append("' target='_blank'>").append(res)
+							.append("</a>");
+					r[3] = r[3].replace(bm2.group(1), respopup.toString());
 				}
-				bo.append(r[3]).append("</div>");
+				bo.append(r[3]).append("</div><hr />\n");
 				count.incl();
 			}
 		}
 		br.close();
 		return bo.toString();
 	}
+
 
 	private static final Res[] getContents(final URL url) throws IOException {
 		List<Res> reslist = new ArrayList<Res>();
