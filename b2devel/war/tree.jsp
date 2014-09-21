@@ -22,7 +22,7 @@
 			<h2><%=catList[0][0]%></h2>
 			<ul data-role="listview"><%for (int t = 1, l2 = catList.length; t < l2; t++) {
 							String[] tName = catList[t];%>
-				<li><a href="./thread.jsp?c=<%= c%>&t=<%= t%>"><%= tName[0]%></a></li><%}%>
+				<li><a href="/thread.jsp?c=<%= c%>&t=<%= t%>"><%= tName[0]%></a></li><%}%>
 			</ul>
 		</div><%}%>
 	</div>

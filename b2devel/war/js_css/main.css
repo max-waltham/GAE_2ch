@@ -5,3 +5,6 @@
 	margin: 4px 4px 2px 2px;
 	padding-left: 2px;
 }
+.ui-li-desc {
+    white-space : normal;
+}

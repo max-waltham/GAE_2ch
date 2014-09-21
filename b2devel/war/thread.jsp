@@ -21,12 +21,10 @@
 		Integer tNum = Integer.parseInt(t);
 		String[][] threadList = B2
 				.getThreadList(B2.getCategoryList()[cNum][tNum]);%>
-	<!-- <ul data-role="listview"> --><%for (String[] tread : threadList) {%>
-		<!--<li>-->
-		<p><a href="./threadContents.jsp?dat=<%= tread[1]%>"><%= tread[0]%>
-		<!--  span class="ui-li-count">1</span--></a></p>
-		<hr />
-		<!--</li>--><%}%>
-	<!-- </ul> -->
+	<ul data-role="listview"><%for (String[] tread : threadList) {%>
+		<li>
+		 <a href="/threadContents.jsp?dat=<%= tread[1]%>"><span class="ui-li-desc"><%= tread[0]%></span></a>
+		</li><%}%>
+	</ul>
 </body>
 </html>
