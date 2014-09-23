@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>b3devel</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="user-scalable=no">
+<link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script
+	src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+<link rel="stylesheet" href="js_css/main.css" />
+<script src="js_css/main.js"></script>
+</head>
+
+<body onload="b3.bodyOnload();">
+
+	<div id="TreeTab" class="ui-body-d ui-content"
+		style="margin: 0; padding: 0; overflow-y: scroll;"></div>
+	<div id="ListTab" class="ui-body-d ui-content"
+		style="display: none; margin: 0; padding: 0; overflow-y: scroll;"></div>
+	<div id="ThreadTab" class="ui-body-d ui-content"
+		style="display: none; margin: 0; padding: 0; overflow-y: scroll; overflow-x: hidden;"></div>
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+		<div data-role="navbar">
+			<ul>
+				<li><a id="TreeTabB" href="#" onclick="b3.active('TreeTab')"
+					class="ui-btn-active">Category</a></li>
+				<li><a id="ListTabB" href="#" onclick="b3.active('ListTab')">List</a></li>
+				<li><a id="ThreadTabB" href="#"
+					onclick="b3.active('ThreadTab')">Thread</a></li>
+			</ul>
+		</div>
+	</div>
+
+
+</body>
+</html>
