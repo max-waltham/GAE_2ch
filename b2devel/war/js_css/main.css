@@ -8,3 +8,6 @@
 .ui-li-desc {
     white-space : normal;
 }
+.ui-collapsible-inset, .ui-collapsible-set {
+    margin: 0 0.5em;
+}

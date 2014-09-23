@@ -1,4 +1,4 @@
-if (false || typeof window.console === "undefined") {
+if (typeof window.console === "undefined") {
 	window.console = {
 		log : function() {
 		}
@@ -7,85 +7,93 @@ if (false || typeof window.console === "undefined") {
 
 var b3 = {
 	version : "0.1.0",
-
-	add : function() {
-		var p1 = new b3.Tree();
-		p1.treeAdd();
-	}
-}
-
-b3.Tree = function() {
-	this.map = {};
-};
-
-b3.Tree.prototype = {
-	tree : function() {
+	tab : {},
+	currentDat : '',
+	loadingObj : {
+		text : "Loading...",
+		textVisible : true,
+		theme : "z",
+		html : ""
+	},
+	bodyOnload : function() {
+		$.mobile.loading("show", b3.loadingObj);
+		var h = $(window).height() - 40;
+		$('#TreeTab').height(h);
+		$('#ListTab').height(h);
+		$('#ThreadTab').height(h)
+		$("#tabs").tabs("option", "active", 0);
 		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "./MainServ?c");
+		xhr.open("GET", "./tree_i.jsp");
 		xhr.onload = function() {
-			var treeDoubleAry = eval(xhr.response);
-			console.log(treeDoubleAry);
+			$.mobile.loading("hide");
+			$("#TreeTab").html(xhr.response).trigger("create");
+		};
+		xhr.send();
+		b3.tab = new b3.Tabs("TreeTab");
+	},
+
+	active : function(id) {
+		b3.tab.active(id);
+	},
+
+	listUp : function(c, t) {
+		$.mobile.loading("show", b3.loadingObj);
+		b3.tab.active("ListTab");
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "./thread_i.jsp?c=" + c + "&t=" + t);
+		xhr.onload = function() {
+			$.mobile.loading("hide");
+			$("#ListTab").html(xhr.response);
+
 		};
 		xhr.send();
 	},
 
-	treeAdd : function() {
-
-		var $div = $("#tree"); // 親要素取得
-		var $jqObj; // 子要素
-		for (var i = 0; i < 5; i++) {
-			// jQueryオブジェクトを作成し、CSSクラス、CSSプロパティ、id属性を付与する
-			$jqObj = $("<div/>").attr("data-role", "collapsible").attr("id",
-					"id" + (i + 1));
-			$jqObj.append($("<h2/>").text('地震').append(
-					$("<ul/>").attr("data-role", "listview").append(
-							$("<li/>").text("aaa"))));
-			// jQueryオブジェクトを子要素として追加する
-			$div.append($jqObj);
+	getThread : function(dat) {
+		if (dat == b3.currentDat) {
+			b3.tab.active("ThreadTab", false);
+			return;
 		}
+		b3.tab.active("ThreadTab", true);
+		$.mobile.loading("show", b3.loadingObj);
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "./threadContents_i.jsp?dat=" + dat);
+		xhr.onload = function() {
+			$.mobile.loading("hide");
+			$("#ThreadTab").html(xhr.response);
+		};
+		xhr.send();
+		b3.currentDat = dat;
 	}
-}
-function tree() {
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "./MainServ?c");
-	xhr.onload = function() {
-		var treeDoubleAry = eval(xhr.response);
-		console.log(treeDoubleAry);
-	};
-	xhr.send();
-}
-function threadList(c, n) {
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "./MainServ?c=" + c + "&t=" + n);
-	xhr.onload = function() {
-		var treeDoubleAry = eval(xhr.response);
-		console.log(treeDoubleAry);
-	};
-	xhr.send();
-}
-function thread(url) {
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "./MainServ?l=" + url);
-	xhr.onload = function() {
-		document.getElementById("thread").innerHTML = xhr.response;
 
-	};
-	xhr.send();
 }
+
+b3.Tabs = function(id) {
+	this.activeId = id;
+	this.tabTops = [];
+}
+b3.Tabs.prototype = {
+	active : function(id, top) {
+		if (this.activeId === id) {
+			// console.log(this.activeId, id)
+			return;
+		}
+		this.tabTops[this.activeId] = $('#' + this.activeId).scrollTop();
+		$('#' + this.activeId).css('display', 'none');
+		$('#' + this.activeId + 'B').removeClass('ui-btn-active');
+		$('#' + id + 'B').addClass('ui-btn-active');
+		$('#' + id).css('display', '');
+		if (!top) {
+			$('#' + id).scrollTop(this.tabTops[id]);
+		}
+		this.activeId = id;
+	},
+
+}
+
 function r_p(ank, res) {
 	var div = document.getElementById("r_" + res);
 	ank.onclick = null;
 	ank.innerHTML = div.innerHTML;
 	ank.className = "r_s";
-}
-function onload() {
-	var useragent = navigator.userAgent;
-	var isMobileDevice = useragent.indexOf("iPhone") !== -1
-			|| useragent.indexOf('Android') !== -1;
-
-	if (isMobileDevice) {
-
-	} else {
-
-	}
 }
