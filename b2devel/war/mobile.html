@@ -3,24 +3,25 @@
 <head>
 <title>b3devel</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="user-scalable=no">
-<link rel="stylesheet"
-	href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script
-	src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
-<link rel="stylesheet" href="js_css/main.css" />
-<script src="js_css/main.js"></script>
+	<meta name="viewport" content="user-scalable=no">
+		<link rel="stylesheet"
+			href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script
+			src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+		<link rel="stylesheet" href="js_css/main.css" />
+		<script src="js_css/main.js"></script>
+		<!--  <script src="nicescroll/jquery.nicescroll.min.js"></script> -->
 </head>
 
 <body onload="b3.bodyOnload();">
 
 	<div id="TreeTab" class="ui-body-d ui-content"
-		style="margin: 0; padding: 0; overflow-y: scroll;"></div>
+		style="overflow-y: scroll"></div>
 	<div id="ListTab" class="ui-body-d ui-content"
-		style="display: none; margin: 0; padding: 0; overflow-y: scroll;"></div>
+		style="display: none; margin: 0; padding: 0; overflow-y: scroll"></div>
 	<div id="ThreadTab" class="ui-body-d ui-content"
-		style="display: none; margin: 0; padding: 0; overflow-y: scroll; overflow-x: hidden;"></div>
+		style="display: none; margin: 0; padding: 0; overflow-y: scroll"></div>
 
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar">
@@ -29,7 +30,9 @@
 					class="ui-btn-active">Category</a></li>
 				<li><a id="ListTabB" href="#" onclick="b3.active('ListTab')">List</a></li>
 				<li><a id="ThreadTabB" href="#"
-					onclick="b3.active('ThreadTab')">Thread</a></li>
+					onclick="b3.active('ThreadTab')" bars>Thread</a></li>
+				<li><button id="scrollUp" data-icon="arrow-u"></button></li>
+				<li><button id="scrollDown" data-icon="arrow-d"></button></li>
 			</ul>
 		</div>
 	</div>

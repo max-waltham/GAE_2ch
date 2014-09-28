@@ -13,7 +13,7 @@
 		for (String[] tread : threadList) {
 	%>
 	<%//<li>	<li> %>
-	<a href="javascript:void(0);" style="text-decoration: none; color:black;"
+	<a href="javascript:void(0);" 
 		onclick="b3.getThread('<%=tread[1]%>')"><div><%=tread[0]%></div></a><hr />
 	<%
 		}
